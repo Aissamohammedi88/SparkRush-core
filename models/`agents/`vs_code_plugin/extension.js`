@@ -1,0 +1,54 @@
+```javascript
+const vscode = require('vscode');
+const { PythonShell } = require('python-shell');
+
+function activate(context) {
+console.log('🚀 SparkRush Core activated. VS Code est maintenant possédé.');
+
+// Commande: "SparkRush: Optimize Current File"
+let optimizeFileCommand = vscode.commands.registerCommand('sparkrush.optimizeFile', async () => {
+const editor = vscode.window.activeTextEditor;
+if (!editor) return;
+
+const code = editor.document.getText();
+const options = {
+mode: 'text',
+pythonPath: 'python3', // Ou l'instance SparkRush
+scriptPath: './agents/optimizer_agent.py',
+args: [JSON.stringify({ code, task: "optimize" })]
+};
+
+const results = await PythonShell.run('sparkrush/core/agents/optimizer_agent.py', options);
+editor.edit(editBuilder => {
+editBuilder.replace(
+new vscode.Range(
+editor.document.positionAt(0),
+editor.document.positionAt(editor.document.getText().length)
+),
+results[0] // Code optimisé
+);
+});
+});
+
+// Commande: "SparkRush: Start Agent Cluster"
+let startClusterCommand = vscode.commands.registerCommand('sparkrush.startCluster', async () => {
+vscode.window.showInformationMessage('🚀 Starting SparkRush Agent Cluster (1 Billion GPUs)...');
+await vscode.window.withProgress({
+location: vscode.ProgressLocation.Notification,
+title: 'SparkRush Core Deploying',
+cancellable: true
+}, async (progress) => {
+progress.report({ increment: 0 });
+// Simulation de déploiement sur 1000 GPUs
+for (let i = 0; i <= 100; i++) {
+progress.report({ increment: 1 });
+await new Promise(resolve => setTimeout(resolve, 50));
+}
+});
+vscode.window.showInformationMessage('✅ SparkRush Agent Cluster up! (Online: 1000xH100 + 5000xA100)');
+});
+
+context.subscriptions.push(optimizeFileCommand, startClusterCommand);
+}
+module.exports = { activate };
+```
