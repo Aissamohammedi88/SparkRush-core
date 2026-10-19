@@ -1,0 +1,36 @@
+```python
+import json
+from pathlib import Path
+from sparkrush.models.spark_1_5b_agentic import Spark1_5BAgentic
+
+class OptimizerAgent:
+def __init__(self, model_path="SparkAI/Spark-1.5B-Agentic"):
+self.model = Spark1_5BAgentic()
+self.prompts = {
+"lint": "Analyse ce code Python pour détecter les bugs, inefficacités et problèmes de style. Retourne un JSON avec : {'bugs': [], 'optimizations': [], 'warnings': []}",
+"refactor": "Propose une version optimisée de ce code Python. Réponds en markdown avec les différences.",
+"test": "Génère des tests unitaires pour ce code Python. Utilise pytest.",
+}
+
+def analyze_code(self, code: str, task="lint"):
+full_prompt = f"""
+TASK: {self.prompts[task]}
+CODE:
+{code}
+"""
+return self.model.generate(full_prompt, max_tokens=1024)
+
+def optimize_workspace(self, workspace_path: str):
+"""Optimise tout un workspace (dossier de code)"""
+import os
+for root, _, files in os.walk(workspace_path):
+for file in files:
+if file.endswith(".py"):
+file_path = Path(root) / file
+with open(file_path, "r") as f:
+code = f.read()
+optimized = self.analyze_code(code, "refactor")
+with open(file_path, "w") as f:
+f.write(optimized) # 🔥 On overwrite direct (prudent en prod)
+return {"status": "workspace_optimized", "files": len(files)}
+```
