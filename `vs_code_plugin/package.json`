@@ -1,0 +1,25 @@
+```json
+{
+"name": "sparkrush-core",
+"displayName": "🔥 SparkRush Core - Agent Runtime Engine (VS Code Killer)",
+"description": "Optimise ton code en temps réel avec Spark-1.5B-Agentic. Déploie des clusters de 1 Billion d'agents. DÉTRUIT MISTRAL 4.",
+"version": "1.0.0",
+"engines": { "vscode": "^1.85.0" },
+"categories": ["AI", "Productivity", "Debuggers"],
+"activationEvents": ["onCommand:sparkrush.optimizeFile", "onCommand:sparkrush.startCluster"],
+"main": "./extension.js",
+"contributes": {
+"commands": [
+{ "command": "sparkrush.optimizeFile", "title": "Optimize Current File with SparkRush" },
+{ "command": "sparkrush.startCluster", "title": "Deploy SparkRush Agent Cluster" }
+],
+"menus": {
+"commandPalette": [
+{ "command": "sparkrush.optimizeFile", "when": "editorTextFocus" },
+{ "command": "sparkrush.startCluster" }
+]
+}
+},
+"repository": { "type": "git", "url": "https://github.com/SparkRush/core" }
+}
+```
