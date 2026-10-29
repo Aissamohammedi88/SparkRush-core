@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=SparkRush Core
+Comment=Native Rust text viewer + optimizer agent (DGK x PROTON)
+Exec=bash -c 'cd __SR_HOME__ && ./sparkrush-core.sh gui'
+Icon=utilities-terminal
+Terminal=true
+Type=Application
+Categories=Development;TextEditor;Utility;
+MimeType=text/plain;text/x-rust;text/x-python;application/x-shellscript;text/xml;application/json;
+Keywords=editor;rust;sparkrush;proton;dgk;
+StartupNotify=true

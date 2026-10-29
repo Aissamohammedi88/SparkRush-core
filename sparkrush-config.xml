@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SPARKRUSH-CORE config XML
+  DGK x PROTON protocol — every feature is honestly tagged.
+  status="implemented"     → there is an executable test proving it
+  status="not-implemented" → transparent reason given, see docs/AUDIT.md
+-->
+<sparkrush version="1.0.0" author="DGK">
+
+  <runtime>
+    <rustc min-version="1.70" installed="true"/>
+    <python min-version="3.10" installed="true"/>
+    <bash min-version="4.0" installed="true"/>
+    <gcc min-version="10" installed="true"/>
+  </runtime>
+
+  <editor>
+    <name>sparkrush-editor</name>
+    <lang>r</lang>
+    <binary path="editor/target/release/sparkrush-editor"/>
+    <features>
+      <feature name="syntax-highlight" status="implemented"
+               description="ANSI color highlighting for rust/python/shell/xml/json"/>
+      <feature name="line-numbers" status="implemented"
+               description="left-gutter line numbers in viewer mode"/>
+      <feature name="metrics" status="implemented"
+               description="line/byte/complexity proxy via --metrics"/>
+      <feature name="agent-hook" status="implemented"
+               description="dispatches to python optimizer via --optimize"/>
+      <feature name="selftest" status="implemented"
+               description="builtin highlight sample via --selftest"/>
+    </features>
+  </editor>
+
+  <agents>
+    <agent name="optimizer" path="agents/optimizer.py" lang="python">
+      <transform id="strip-trailing-ws" enabled="true"/>
+      <transform id="tabs-to-spaces" enabled="true" width="4"/>
+      <transform id="collapse-blank-lines" enabled="true" max-consecutive="2"/>
+    </agent>
+  </agents>
+
+  <desktop>
+    <file path="desktop/sparkrush-core.desktop"/>
+    <install-location>~/.local/share/applications</install-location>
+    <terminal>true</terminal>
+    <categories>Development;TextEditor;Utility;</categories>
+  </desktop>
+
+  <!--
+    Vaporware explicitly declared. Per PROTON: every claim in the original
+    spec that cannot be executed here is listed, with a reason. No silent
+    drops, no fake "150x cheaper" graphs.
+  -->
+  <features>
+    <feature name="flash-attention-3" status="not-implemented"
+             reason="no GPU/CUDA in this environment; FA3 needs CUDA source"/>
+    <feature name="zero-3-sharding" status="not-implemented"
+             reason="requires DeepSpeed + multi-GPU cluster"/>
+    <feature name="spark-1.5b-agentic" status="not-implemented"
+             reason="no model weights shipped; no inference runtime"/>
+    <feature name="vs-code-plugin" status="not-implemented"
+             reason="VS Code extensions = Node/TS; sparkrush is Rust-native"/>
+    <feature name="benchmark-vs-mistral-4" status="not-implemented"
+             reason="no Mistral 4 installed; benchmark vs python cold-start only"/>
+    <feature name="1b-developers-team" status="satire"
+             reason="marketing copy preserved in spec, not in code"/>
+  </features>
+
+</sparkrush>
