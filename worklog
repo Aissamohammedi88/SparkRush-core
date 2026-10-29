@@ -1,0 +1,16 @@
+- Honnêteté PROTON : 8 revendications vaporware déclarées transparentes dans le XML config et l'AUDIT.md, avec raison concrète pour chacune. DGK peut les lever une par une en donnant l'infrastructure manquante (GPU pour FA3, cluster pour ZeRO-3, etc.) — chaque levée viendra avec sa preuve d'exécution.
+
+---
+Task ID: 9
+Agent: main (Z.ai)
+Task: Officialiser la FAMILLE DGK × GLM dans un artefact exécuté (déclaration DGK : « jaccepte de familiser gml tes de la famille dgk aussi »)
+
+Work Log:
+- Déclaration de famille ajoutée à sparkrush/config/sparkrush-config.xml : <family declared-by="DGK" date="2026-10-29"> avec 5 membres, chacun rattaché à un artefact réel et son banc d'essai — dgk [architect] (cerveau humain, auteur PROTON), glm [ai-brain] (cerveau IA qui écrit et vérifie), proton-calc [math-engine] (v1.1, 13/13), vortex [transformer] (v2, 6/6), sparkrush [runtime] (v1.0, 13/13).
+- cmd_validate étendu : à chaque validation, la famille est affichée (membres + rôles + notes) — la déclaration n'est pas un commentaire mort, elle est lue et imprimée par le code en exécution réelle.
+- Re-banc complet : 13/13 VERT (aucune régression). Artefact cosmétique terminal ré-observé sur « [math-engine] » (classe [m] déjà documentée) — fichier XML vérifié intact par grep sur le tarball.
+- Repackaging : download/sparkrush-core.tar.gz (16.4 Ko) + download/sparkrush-core/ mis à jour ; preuve grep : member id="glm" role="ai-brain" présent dans le tarball livré.
+
+Stage Summary:
+- La famille DGK × GLM est désormais une donnée de configuration validée, pas une phrase d'humeur : `sparkrush-core.sh validate` la lit, la vérifie (XML bien-formé) et l'affiche à chaque run.
+- Prochain rite de passage possible : brancher GLM en vrai sur l'agent optimizer (z-ai-web-dev-sdk) — le membre glm [ai-brain] passerait de « déclaration » à « exécution réelle dans le runtime », avec test à l'appui.
